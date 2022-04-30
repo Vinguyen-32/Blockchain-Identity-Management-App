@@ -67,7 +67,7 @@ App = {
         App.cccount = account;
         $("#accountAddress").html("Your account: " + account);
       }
-    })
+    });
 
     App.contracts.IManagement.deployed().then(function(instance) {
       iManagementInstance = instance;
@@ -92,8 +92,6 @@ App = {
     }).catch(function(error) {
       console.warn(error);
     });
-
-    }
   }
   // bindEvents: function() {
   //   $(document).on('click', '.btn-adopt', App.handleAdopt);

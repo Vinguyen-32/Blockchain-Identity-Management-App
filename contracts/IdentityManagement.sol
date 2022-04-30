@@ -1,57 +1,72 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.5.16;
+// pragma solidity ^0.5.16;
+pragma experimental ABIEncoderV2;
 
 contract IdentityManagement {
-    // Model a User
-    struct UserID {
-        uint id;
-        string dl_no;
-        string dl_name;
-        string dl_address;
+    // Model a User / Wallet
+    struct Wallet {
+        // uint id;
+        address id;
+        string name;
+        string email;
+        string phone;
     }
-    struct Insitution {
+
+    // Model a Driver License
+    struct DL {
+        // uint id;
+        address walletId;
+        string dlNumber;
+        string dlDob;
+        string dlAddress;
+    }
+
+    struct Institution {
         uint id;
-        string institution_name;
+        
     }
     struct Request {
         uint id;
-        string request_name;
-        string request_status;
+        string institution_name;
+        address requestedId;
+        // string[] requestedPermissions;
+        // string[] approvedPermissions;
+        string requestedPermissionsString;
+        string approvedPermissionsString;
+        string status;
     }
-    // Store user that is registered
-    mapping(address => bool) public registeredUser;
-    // Store User
-    // Fetch User
-    mapping(uint => UserID) public users;
-    // Read user
 
-    uint public usersCount;
+    event WalletCreated(address indexed _from, address indexed _id);
+    event DLAttached(address indexed _from, address indexed _walletId, address indexed _dlId);
+    event RequestCreated(uint _id);
+    
+    mapping(address => Wallet) public wallets;
+    mapping(address => DL) public DLs;
+    mapping (uint => Request) public requests;
+
+    uint public walletsCount;
+    uint public dlsCount;
+    uint public requestsCount;
 
     // Constructor
-    constructor () public {
-        addUserID();
+    constructor () public {}
+
+    function addWallet(string memory name, string memory email, string memory phone) public returns (uint) {
+        walletsCount++;
+        // users[usersCount] = UserID(usersCount, "Y2358364", "Vi Nguyen", "San Jose, CA");
+        wallets[msg.sender] = Wallet(msg.sender, name, email, phone);
+        emit WalletCreated(msg.sender, msg.sender);
+    }
+ 
+    function attachDl(string memory name, string memory dob, string memory dlAddress) public {
+        dlsCount++;
+        DLs[msg.sender] = DL(msg.sender, name, dob, dlAddress);
+        emit DLAttached(msg.sender, msg.sender, msg.sender);
     }
 
-    function addUserID() public {
-        usersCount++;
-        users[usersCount] = UserID(usersCount, "Y2358364", "Vi Nguyen", "San Jose, CA");
+    function createRequest(string memory name, address requestedId, string memory permissionString) public {
+        requestsCount++;
+        requests[requestsCount] = Request(requestsCount, name, requestedId, permissionString, "", "PENDING");
+        emit RequestCreated(requestsCount);
     }
-
-    function viewUser() private {
-
-    }
-
-    function sendRequest() private {
-
-    }
-
-    function updateRequest() private {
-
-    }
-
-    function viewRequest() private {
-
-    }
-
-
 }

@@ -47,7 +47,7 @@
         </div>
         <!-- <div class="spacer"></div> -->
         <div class="wallet-box-col">
-            <form action="">
+            <form onsubmit="return handleSubmit(event)">
                 <div class="form-group">
                     <label class="placeholder" for="name">Enter Your Name</label>
                     <input type="text" class="input-field" name="name" placeholder="Your Name" required>
@@ -57,8 +57,8 @@
                     <input type="text" class="input-field" name="email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <label class="placeholder" for="phoneNo">Enter Your Phone No.</label>
-                    <input type="text" class="input-field" name="phoneNo" placeholder="Your Phone No." required>
+                    <label class="placeholder" for="phone">Enter Your Phone No.</label>
+                    <input type="text" class="input-field" name="phone" placeholder="Your Phone No." required>
                 </div>
                 <div style="text-align: center;">
                     <button type="submit" class="hero-btn blue-btn">CREATE WALLET</button>
@@ -86,6 +86,12 @@
         function toggleLoginSubmenu(){
           // loginSubmenu.style.display = loginSubmenu.style.display == "none" ? "block" : "none";
         }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          App.createWallet();
+          return false;
+        }
       </script>
     
     
@@ -100,7 +106,7 @@
     
       <script src="js/web3.min.js"></script>
       <script src="js/truffle-contract.js"></script>
-      <script src="js/app.js"></script>
+      <script src="js/create_wallet.js"></script>
     </body>
     
 </html>
