@@ -43,35 +43,54 @@
       </section>
       <section class="wallet-box">
         <div class="title">
-            <h2>Create Wallet</h2>
+            <h2>View & Approve Access Requests</h2>
         </div>
-        <!-- <div class="spacer"></div> -->
-        <div class="wallet-box-col">
-            <form onsubmit="return handleSubmit(event)">
-                <div class="form-group">
-                    <label class="placeholder" for="name">Enter Your Name</label>
-                    <input type="text" class="input-field" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <label class="placeholder" for="email">Enter Your Email</label>
-                    <input type="text" class="input-field" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <label class="placeholder" for="phone">Enter Your Phone No.</label>
-                    <input type="text" class="input-field" name="phone" placeholder="Your Phone No." required>
-                </div>
-                <div style="text-align: center;">
-                    <button type="submit" class="hero-btn blue-btn">CREATE WALLET</button>
-                </div>
-            </form>
+        <div class="table-view">
+            <!-- <form action="">
+                <input type="text" class="input-field" placeholder="Driver License No." required>
+                <input type="text" class="input-field" placeholder="Name as per Driver License" required>
+                <input type="text" class="input-field" placeholder="DOB as per Driver License" required>
+                <textarea type="text" class="input-field" placeholder="Address as per Driver License" required></textarea>
+                <label class="input-field">Attach Driver License</label>
+                <button type="chooseFile" class="btn blue-btn">Choose File</button>
+                <button type="submit" class="hero-btn blue-btn">Add Driver License</button>
+            </form> -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Institution Name</th>
+                        <th>Approval Status</th>
+                        <th>Info</th>
+                    </tr>
+                </thead>
+                <tbody id="request-table-content">
+                    <!-- <tr>
+                        <td><p class="">ABC Company</p></td>
+                        <td><p class="status status-approved">Approved</p></td>
+                        <td><button class="more-info-btn blue-btn" id="viewMoreInfo">MORE INFO</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="">Vi Company</p></td>
+                        <td><p class="status status-partially-approved">Partially Approved</p></td>
+                        <td><button class="more-info-btn blue-btn" id="viewMoreInfo">MORE INFO</button></td>
+                    </tr>
+                    <tr>
+                        <td><p class="">Sam Company</p></td>
+                        <td><p class="status status-waiting-approved">Waiting Approved</p></td>
+                        <td><button class="more-info-btn blue-btn" id="viewMoreInfo">MORE INFO</button></td>
+                    </tr> -->
+                </tbody>
+            </table>
         </div> 
+        
       </section>
     
     
       <script>
         var navLinks = document.getElementById("navLinks");
         var icon = document.getElementById("icon");
-        let loginSubmenu = document.getElementById("loginSubmenu")
+        let loginSubmenu = document.getElementById("loginSubmenu");
+        var viewMoreInfo = document.getElementById("viewMoreInfo");
     
     
         function showMenu(){
@@ -94,11 +113,10 @@
           // loginSubmenu.style.display = loginSubmenu.style.display == "none" ? "block" : "none";
         }
 
-        function handleSubmit(e) {
-          e.preventDefault();
-          App.createWallet();
-          return false;
+        viewMoreInfo.onclick = function() {
+            location.href = "more-info-approve-access.html";
         }
+        
       </script>
     
     
@@ -113,7 +131,7 @@
     
       <script src="js/web3.min.js"></script>
       <script src="js/truffle-contract.js"></script>
-      <script src="js/create_wallet.js"></script>
+      <script src="js/user_access_management.js"></script>
     </body>
     
 </html>

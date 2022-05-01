@@ -39,6 +39,7 @@ contract IdentityManagement {
     event WalletCreated(address indexed _from, address indexed _id);
     event DLAttached(address indexed _from, address indexed _walletId, address indexed _dlId);
     event RequestCreated(uint _id);
+    event RequestApproved(uint _id);
     
     mapping(address => Wallet) public wallets;
     mapping(address => DL) public DLs;
@@ -53,7 +54,6 @@ contract IdentityManagement {
 
     function addWallet(string memory name, string memory email, string memory phone) public returns (uint) {
         walletsCount++;
-        // users[usersCount] = UserID(usersCount, "Y2358364", "Vi Nguyen", "San Jose, CA");
         wallets[msg.sender] = Wallet(msg.sender, name, email, phone);
         emit WalletCreated(msg.sender, msg.sender);
     }
@@ -68,5 +68,12 @@ contract IdentityManagement {
         requestsCount++;
         requests[requestsCount] = Request(requestsCount, name, requestedId, permissionString, "", "PENDING");
         emit RequestCreated(requestsCount);
+    }
+
+    function approveRequest(uint requestId, string memory status, string memory permissionString) public {
+        requests[requestId].approvedPermissionsString = permissionString;
+        requests[requestId].status = status;
+
+        emit RequestApproved(requestId);
     }
 }

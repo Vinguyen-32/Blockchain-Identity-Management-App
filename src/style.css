@@ -279,8 +279,19 @@ nav .fa {
 
 /*--------sub-menu-login----------*/
 
-.sub-menu-login {
+/* .sub-menu-login {
     display: none;
+} */
+
+.sub-menu-login {
+    display: block;
+    position: absolute;
+    background: rgba(20, 174, 235, 0.7);
+    margin-top: 15px;
+    border-radius: 10px;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .nav-links ul {
@@ -288,28 +299,29 @@ nav .fa {
     margin: 0;
 }
 
-.nav-links ul li:hover .sub-menu-login {
-    display: block;
+.nav-links ul li:hover > .sub-menu-login {
+    /* display: block;
     position: absolute;
     background: rgba(20, 174, 235, 0.7);
     margin-top: 15px;
-    /* margin-left: -15px; */
-    border-radius: 10px;
-    
+    margin-left: -15px;
+    border-radius: 10px; */
+    opacity: 1;
+    visibility: visible;
 }
 
-.nav-links ul li:hover .sub-menu-login ul {
+/* .nav-links ul li:hover > .sub-menu-login ul {
     display: block;
     margin: 10px;
 }
 
-.nav-links ul li:hover .sub-menu-login ul li {
+.nav-links ul li:hover > .sub-menu-login ul li {
     width: 80px;
     padding: 10px;
     background: transparent;
     border-radius: 10px;
     text-align: left;
-}
+} */
 
 /*---------create-wallet-page----------*/
 
@@ -496,6 +508,12 @@ tr:nth-child(even) {
     margin-top: 3%;
     justify-content: center;
 }
+
+.status-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 
 .institution-name {
     margin: .5rem .7rem;

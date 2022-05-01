@@ -64,7 +64,7 @@
                     </tr>
                 </thead>
                 <tbody id="request-table-content">
-                    <tr>
+                    <!-- <tr>
                         <td><p class="">ABC Company</p></td>
                         <td><p class="status status-approved">Approved</p></td>
                         <td><button class="more-info-btn blue-btn" id="viewMoreInfo">MORE INFO</button></td>
@@ -78,7 +78,7 @@
                         <td><p class="">Sam Company</p></td>
                         <td><p class="status status-waiting-approved">Waiting Approved</p></td>
                         <td><button class="more-info-btn blue-btn" id="viewMoreInfo">MORE INFO</button></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div> 
@@ -103,6 +103,13 @@
         }
     
         function toggleLoginSubmenu(){
+          if (loginSubmenu.style.visibility == "visible" && loginSubmenu.style.opacity == "1") {
+            loginSubmenu.style.opacity = "0";
+            loginSubmenu.style.visibility = "hidden";
+          } else {
+            loginSubmenu.style.opacity = "1";
+            loginSubmenu.style.visibility = "visible";
+          }
           // loginSubmenu.style.display = loginSubmenu.style.display == "none" ? "block" : "none";
         }
 

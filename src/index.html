@@ -36,7 +36,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <style>
+  <!-- <style>
     .create-wallet-button {
       height: 13rem;
       width: 13rem;
@@ -106,7 +106,7 @@
 
 
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
@@ -175,6 +175,13 @@
     }
 
     function toggleLoginSubmenu(){
+      if (loginSubmenu.style.visibility == "visible" && loginSubmenu.style.opacity == "1") {
+        loginSubmenu.style.opacity = "0";
+        loginSubmenu.style.visibility = "hidden";
+      } else {
+        loginSubmenu.style.opacity = "1";
+        loginSubmenu.style.visibility = "visible";
+      }
       // loginSubmenu.style.display = loginSubmenu.style.display == "none" ? "block" : "none";
     }
 

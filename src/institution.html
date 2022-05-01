@@ -50,7 +50,7 @@
             </div>
           </div>
           
-          <div class="institution-menu-col" id="viewAcccessStatus">
+          <div class="institution-menu-col" id="viewAccessStatus">
             <img class="menuLogo" src="images/authorization.png">
             <div class="layer">
               <h3>View Access Status</h3>
@@ -78,6 +78,13 @@
         }
     
         function toggleLoginSubmenu(){
+          if (loginSubmenu.style.visibility == "visible" && loginSubmenu.style.opacity == "1") {
+            loginSubmenu.style.opacity = "0";
+            loginSubmenu.style.visibility = "hidden";
+          } else {
+            loginSubmenu.style.opacity = "1";
+            loginSubmenu.style.visibility = "visible";
+          }
           // loginSubmenu.style.display = loginSubmenu.style.display == "none" ? "block" : "none";
         }
 
@@ -86,7 +93,7 @@
         }
 
         viewAccessStatus.onclick = function() {
-            location.href = ""
+            location.href = "view-access-request-institution.html"
         }
       </script>
     

@@ -69,7 +69,7 @@ App = {
             `<tr>
                 <td><p class="">${name}</p></td>
                 <td><p class="status status-approved">${status}</p></td>
-                <td><button class="more-info-btn blue-btn" id="viewMoreInfo">MORE INFO</button></td>
+                <td><button class="more-info-btn blue-btn" onclick="window.location.href='more-info-approve-access.html?requestId=${id}'">MORE INFO</button></td>
             </tr>`
             tableContent.append(template);
           });

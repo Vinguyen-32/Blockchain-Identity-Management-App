@@ -136,6 +136,13 @@
         }
     
         function toggleLoginSubmenu(){
+            if (loginSubmenu.style.visibility == "visible" && loginSubmenu.style.opacity == "1") {
+            loginSubmenu.style.opacity = "0";
+            loginSubmenu.style.visibility = "hidden";
+          } else {
+            loginSubmenu.style.opacity = "1";
+            loginSubmenu.style.visibility = "visible";
+          }
           // loginSubmenu.style.display = loginSubmenu.style.display == "none" ? "block" : "none";
         }
 
