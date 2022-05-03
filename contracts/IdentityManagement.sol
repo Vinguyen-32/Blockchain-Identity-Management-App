@@ -16,6 +16,7 @@ contract IdentityManagement {
     struct DL {
         // uint id;
         address walletId;
+        string dlName;
         string dlNumber;
         string dlDob;
         string dlAddress;
@@ -40,6 +41,8 @@ contract IdentityManagement {
     event DLAttached(address indexed _from, address indexed _walletId, address indexed _dlId);
     event RequestCreated(uint _id);
     event RequestApproved(uint _id);
+    event RetrieveApproved(string dlNo, string dlName, string dlDOB, string dlAddress, string);
+
     
     mapping(address => Wallet) public wallets;
     mapping(address => DL) public DLs;
@@ -58,9 +61,9 @@ contract IdentityManagement {
         emit WalletCreated(msg.sender, msg.sender);
     }
  
-    function attachDl(string memory name, string memory dob, string memory dlAddress) public {
+    function attachDl(string memory name, string memory number, string memory dob, string memory dlAddress) public {
         dlsCount++;
-        DLs[msg.sender] = DL(msg.sender, name, dob, dlAddress);
+        DLs[msg.sender] = DL(msg.sender, name, number, dob, dlAddress);
         emit DLAttached(msg.sender, msg.sender, msg.sender);
     }
 
@@ -76,4 +79,17 @@ contract IdentityManagement {
 
         emit RequestApproved(requestId);
     }
+
+    // function getApprovedAccessData(uint requestId) public {
+    //     //  address walletId;
+    //     // string dlNumber;
+    //     // string dlDob;
+    //     // string dlAddress;
+
+    //     // requests[requestId].walletId;
+
+
+    //     // requests[requestId].walletId
+    //     emit RetrieveApproved(DLs[requests[requestId].walletId].dlNumber, DLs[requests[requestId].walletId].name, DLs[requests[requestId].walletId].dlDob, DLs[requests[requestId].walletId].dlAddress, "");
+    // }
 }

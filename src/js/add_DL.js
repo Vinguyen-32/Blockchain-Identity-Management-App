@@ -37,7 +37,7 @@ App = {
             App.contracts.IManagement.deployed().then(function (instance) {
                 iManagementInstance = instance;
 
-                iManagementInstance.attachDl(name, dob, address, { from: web3.eth.accounts[1], gas: 3000000 })
+                iManagementInstance.attachDl(name, DLID, dob, address, { from: web3.eth.accounts[1], gas: 3000000 })
                     .then(function (receipt) {
                         const { logs } = receipt;
                         const result = logs[0];

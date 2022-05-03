@@ -48,30 +48,42 @@ App = {
                 let status = request[5];
                 requestedPermissionsString = request[3];
                 approvedPermissionsString = request[4];
-                console.log("requestedPermissionsString: " + requestedPermissionsString)
-                console.log("approvedPermissionsString: " + approvedPermissionsString)
                 let requestedPermissions = requestedPermissionsString.split("");
                 let permissionBody = "";
-                requestedPermissions.map(function (p, idx) {
-                    if (p == "1") {
-                        permissionBody += `
-                        <tr>
-                        <td><p class="">${PERMISSIONS[idx]}</p></td>
-                        <td class="checkmark-box">
-                            <label>
-                                <input class="checkbox" type="checkbox" value="${PERMISSIONS[idx]}" ${approvedPermissionsString[idx] == "1" ? "checked" : ""}>
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    `
-                    }
+
+                iManagementInstance.DLs(request[2]).then(function (DL) {
+                    iManagementInstance.wallets(request[2]).then(function (wallet) {
+                        requestedPermissions.map(function (p, idx) {
+                            const dlData = [
+                                DL[2],
+                                DL[1],
+                                DL[3],
+                                DL[4],
+                                ""
+                            ]
+
+                            if (p == "1") {
+                                const approved = approvedPermissionsString[idx] == "1";
+                                permissionBody += `
+                            <tr>
+                            <td><p class="">${PERMISSIONS[idx]}</p></td>
+                            <td class="checkmark-box">
+                                <label>${approved ? '✔️' : '❌'}</label>
+                            </td>
+                            <td>
+                                ${approved ? dlData[idx] : ""}
+                            </td>
+                        </tr>
+                        `
+                            }
+                        })
+
+                        document.getElementById("institutionName").innerHTML = name;
+                        document.getElementById("permissions").innerHTML = permissionBody;
+                        document.getElementById("requestStatus").innerHTML = status;
+                    })
                 })
 
-                document.getElementById("institutionName").innerHTML = name;
-                document.getElementById("permissions").innerHTML = permissionBody;
-                document.getElementById("requestStatus").innerHTML = status;
-                
             });
         }).catch(function (e) {
             console.log("fail: ", e)
@@ -79,10 +91,10 @@ App = {
     },
     approveRequest: function () {
         let selectedPermissions = $('.checkbox:checkbox:checked').map(function () { return this.value; }).get();
-        console.log("asd: " , selectedPermissions)
-        let permissions = PERMISSIONS.map(function (permission) { console.log(permission);return selectedPermissions.indexOf(permission) > -1 ? "1" : "0" }).join("");
+        console.log("asd: ", selectedPermissions)
+        let permissions = PERMISSIONS.map(function (permission) { console.log(permission); return selectedPermissions.indexOf(permission) > -1 ? "1" : "0" }).join("");
 
-         console.log("permissions: ", permissions)
+        console.log("permissions: ", permissions)
         App.contracts.IManagement.deployed().then(function (instance) {
             iManagementInstance = instance;
 
@@ -91,7 +103,7 @@ App = {
             let requestId = url.searchParams.get("requestId");
 
             let status = permissions == requestedPermissionsString ? "APPROVED" : permissions == "00000" ? "NOT APPROVED" : "PATIAL APPROVED";
-            
+
             iManagementInstance.approveRequest(requestId, status, permissions, { from: web3.eth.accounts[1], gas: 3000000 })
                 .then(function (receipt) {
                     const { logs } = receipt;
