@@ -27,7 +27,7 @@
               <i class="fa fa-times" onclick="hideMenu()"></i>
               <ul id="menuItems">
                 <li><a href="institution.html">HOME</a></li>
-                <li onclick="toggleLoginSubmenu()"><a href="#">ACCOUNT</a>
+                <li onclick="toggleLoginSubmenu()"><a href="#">ACCOUNT:INSTITUTION</a>
                   <div id="loginSubmenu" class="sub-menu-login">
                     <ul>
                       <li><a href="index.html">USER</a></li>
@@ -55,8 +55,8 @@
                 <div class="form-group">
                     <input type="text" class="input-field" name="blockchainID" placeholder="User Blockchain ID" required>
                 </div>
-                <div class="table-section">
-                    <table>
+                <div class="form-group">
+                    <table class="request-access-table">
                         <thead>
                             <tr>
                                 <th class="header-title">Requested Access</th>
@@ -151,6 +151,15 @@
           App.createRequest();
           return false;
         }
+
+        function prefill() {
+            let currentUser = JSON.parse(localStorage["currentUser"] || "{}");
+            if (currentUser.walletId){
+                document.getElementsByName("blockchainID")[0].value = currentUser.walletId;
+            }
+        }
+
+        prefill();
       </script>
     
     
