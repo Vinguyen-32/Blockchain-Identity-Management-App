@@ -15,6 +15,7 @@ App = {
     },
     initWeb3: function () {
         if (typeof web3 !== 'undefined') {
+            ethereum.request({ method: 'eth_requestAccounts' });
             App.web3Provider = web3.currentProvider;
             web3 = new Web3(web3.currentProvider);
         }
@@ -92,7 +93,7 @@ App = {
 
             let status = permissions == requestedPermissionsString ? "APPROVED" : permissions == "00000" ? "NOT APPROVED" : "PATIAL APPROVED";
             
-            iManagementInstance.approveRequest(requestId, status, permissions, { from: web3.eth.accounts[1], gas: 3000000 })
+            iManagementInstance.approveRequest(requestId, status, permissions, { from: web3.eth.accounts[0], gas: 3000000 })
                 .then(function (receipt) {
                     const { logs } = receipt;
                     const result = logs[0];
